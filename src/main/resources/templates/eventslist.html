@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Github Repository Events</title>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
+</head>
+<body>
+<div class="container">
+
+<th:block th:if="${#lists.isEmpty(events) || events.isEmpty()}">No Events Found for this repository</th:block>
+
+<div th:if="${events != null || !events.isEmpty()}"/>
+	<h2>Events List</h2>
+	<table class="table table-stripped">
+	<thead class="thead-dark">
+	<tr>
+		<th>ID</th>
+		<th>Event Type </th>
+		<th>Login</th>
+		<th>Repository Name</th>
+		<th>Created At </th>
+	</tr>
+	</thead>
+<tr th:each="event: ${events}">
+    <td th:text="${event.getId()}" />
+    <td th:text="${event.getType()}" />
+    <td th:text="${event.getActor().getLogin()}" />
+      <td th:text="${event.getRepo().getName()}" />
+       <td th:text="${event.getCreated_at()}" />      
+</tr>
+
+</table>
+
+</div>
+</body>
+</html>
